@@ -1,3 +1,6 @@
+source("path/stepwise_valued_simulation.R") #Both Functions needed
+source("path/multi_value")
+
 multi_value(mrna_name = "mrna_0_02_06.RData", 
             target_con = c(0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1), 
             value_con = c(0.96, 0.97, 0.98, 0.985, 0.99), 
@@ -17,8 +20,6 @@ multi_value(mrna_name = "mrna_0_02_06.RData",
             keep_all_rnas_ = FALSE
             ) 
 
-####### END OF COPY PASTE#######
-
 
 
 # This command will produce 45 Output Files in the Current Working directory(9*5).
@@ -36,7 +37,7 @@ multi_value(mrna_name = "mrna_0_02_06.RData",
 #
 
 
-#This Function  will prefor every possile combination of input setting.
+#This Function  will preform every possile combination of input setting!!
 # Parameters that will accept Vectors
 
 #target_con: Target Value Constrain. 0.5 = 50%. Makes sure that the old Target Value wont decrease to much after each mutation checkpoint.
@@ -61,3 +62,4 @@ multi_value(mrna_name = "mrna_0_02_06.RData",
 # accessibility: TRUE = intaRNA call will include the accessibility of the RNAs
 # keep_all_rnas: FALSE = RNAs wont be safed in the output. WARNING If TRUE the Programm might crash. 
 # This uses a LOT of RAM space (Because of my bad code) only use if you do small runs.
+
