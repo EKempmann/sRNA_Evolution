@@ -1,0 +1,60 @@
+# Function to do multiple stepwise valued simulations
+# This function allows to specify a various amount of imputs for the function stepwise_valued_simulation.
+
+
+multi_value <- function(mrna_name, 
+                        target_con = c(), 
+                        value_con = c(), 
+                        target_gr = c(), 
+                        perc_of_mean_val = c(), 
+                        percentage_of_pos_val = c(), 
+                        start_target_number_ = c(),
+                        durchlaeufe = 100000,
+                        srna = "Ryhblong.fa",
+                        core = 8,
+                        wiederholungen_ = 2,
+                        time_steps_ = 10,
+                        store = 200,
+                        target_constrain = TRUE,
+                        rna_constrain = TRUE,
+                        accessibility_ = TRUE,
+                        keep_all_rnas_ = FALSE
+                        ){
+
+  for(i in target_con){
+    for(j in value_con){
+      for(k in target_gr){
+        for(p in perc_of_mean_val){
+          for(q in percentage_of_pos_val){
+            for(l in start_target_number_){
+            filename <- paste("valued_",-k,"_",i*100,"_",j*100,"_",p,"_",q,"_", l, "_",mrna_name, sep = "")
+            print(filename)
+            tryCatch(
+            stepwise_valued_simulation(name_of_outputfile = filename,
+                                     save_directory = "current",
+                                     durchlaeufe_ = durchlaeufe, 
+                                     mrna_ = mrna_name,
+                                     srna_ = srna,
+                                     translation_start_ = 34,
+                                     core_ = core,
+                                     time_steps = time_steps_,
+                                     wiederholungen = wiederholungen_,
+                                     target_grenze_ = k,
+                                     store_ = store,
+                                     target_value_threshold_ = i,
+                                     srna_value_threshold_ = j,
+                                     target_constrain_ = target_constrain,
+                                     rna_constrain_ = rna_constrain,
+                                     accessibility = accessibility_,
+                                     keep_all_rnas = keep_all_rnas_,
+                                     change_start_values = p,
+                                     percentage_of_pos_values = q,
+                                     start_target_number = l) , error = function(e){print(e$message)})
+            }
+          
+          }
+        }
+      }
+    }
+  }
+}
